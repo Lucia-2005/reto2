@@ -133,6 +133,9 @@ $(document).ready(function() {
         
         // agregar eventos a los botones de favorito
         agregarEventosFavoritos();
+        
+        // agregar eventos para ir a wikipedia
+        agregarEventosWikipedia();
     }
     
     // funcion para agregar eventos a botones favoritos
@@ -141,6 +144,36 @@ $(document).ready(function() {
             e.stopPropagation();
             var fechaFestival = $(this).attr('data-date');
             toggleFavorito(fechaFestival);
+        });
+    }
+    
+    // funcion para agregar eventos para ir a wikipedia
+    function agregarEventosWikipedia() {
+        $('.festividad-card').click(function() {
+            // obtener la fecha de la festividad
+            var fechaFestival = $(this).attr('data-date');
+            
+            // buscar la festividad en el array
+            var festividad = null;
+            for (var i = 0; i < todasLasFestividades.length; i++) {
+                if (todasLasFestividades[i].date == fechaFestival) {
+                    festividad = todasLasFestividades[i];
+                    break;
+                }
+            }
+            
+            if (festividad != null) {
+                // crear la url de wikipedia con el nombre local
+                var nombreParaWikipedia = festividad.localName;
+                // reemplazar espacios por guiones bajos
+                nombreParaWikipedia = nombreParaWikipedia.replace(/ /g, '_');
+                
+                // construir url de wikipedia en español
+                var urlWikipedia = 'https://es.wikipedia.org/wiki/' + nombreParaWikipedia;
+                
+                // abrir en nueva pestaña
+                window.open(urlWikipedia, '_blank');
+            }
         });
     }
     

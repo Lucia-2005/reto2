@@ -1,4 +1,4 @@
-
+/* reseteo basico */
 * {
     margin: 0;
     padding: 0;
@@ -161,7 +161,7 @@ h1 {
     padding: 40px;
 }
 
-/* espacio de las tarjetas */
+/* grid de las tarjetas */
 .festividades-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -185,9 +185,10 @@ h1 {
 .festividad-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    background: #fffbfd;
 }
 
-/* botón de favorito */
+/* boton favorito */
 .btn-favorito {
     position: absolute;
     top: 15px;
@@ -224,7 +225,7 @@ h1 {
     font-weight: 600;
 }
 
-/* nombre en español */
+/* nombre en idioma local */
 .nombre-local {
     font-size: 0.95em;
     color: #6b6b6b;
@@ -263,4 +264,28 @@ h1 {
     padding: 40px;
     color: #6b6b6b;
     font-size: 1.1em;
+}
+
+/* para movil */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2em;
+    }
+    
+    .festividades-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    #form-buscar {
+        flex-direction: column;
+    }
+    
+    .campo-busqueda,
+    .campo-fecha {
+        width: 100%;
+    }
+    
+    .filtros {
+        justify-content: center;
+    }
 }
