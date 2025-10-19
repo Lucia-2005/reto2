@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 2.5rem;
+}
+
+.selector {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    font-size: 1.2rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+select {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    border: 2px solid #667eea;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.loading {
+    text-align: center;
+    color: white;
+    font-size: 1.2rem;
+    padding: 20px;
+    display: none;
+}
+
+.songs-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: none;
+}
+
+.album-info {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.album-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.album-text {
+    flex: 1;
+}
+
+.album-info h2 {
+    color: #333;
+    font-size: 2rem;
+}
+
+.song-count {
+    color: #666;
+    font-size: 1rem;
+}
+
+.songs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.song-card {
+    padding: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.song-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.song-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+}
+
+.song-album {
+    color: #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.no-selection {
+    text-align: center;
+    color: white;
+    font-size: 1.1rem;
+    padding: 40px;
+}

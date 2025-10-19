@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canciones Taylor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Canciones de Taylor Swift</h1>
+        
+        <div class="selector">
+            <label>Selecciona un álbum:</label>
+            <select id="albumSelect">
+                <option value="">-- Elige un álbum --</option>
+                <option value="1">1989</option>
+                <option value="2">Taylor Swift</option>
+                <option value="3">Fearless</option>
+                <option value="4">Speak Now</option>
+                <option value="5">Red</option>
+                <option value="6">Reputation</option>
+                <option value="7">Lover</option>
+                <option value="8">Folklore</option>
+                <option value="9">Evermore</option>
+                <option value="10">Midnights</option>
+                <option value="11">The Tortured Poets Department</option>
+            </select>
+        </div>
+
+        <div id="loading" class="loading">
+            Cargando...
+        </div>
+
+        <div id="songsContainer" class="songs-container">
+            <div class="album-info">
+                <img id="albumImage" class="album-image" src="" alt="">
+                <div class="album-text">
+                    <h2 id="albumName"></h2>
+                    <p class="song-count" id="songCount"></p>
+                </div>
+            </div>
+            <div id="songsGrid" class="songs-grid"></div>
+        </div>
+
+        <div id="noSelection" class="no-selection">
+            Selecciona un álbum para ver las canciones
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
