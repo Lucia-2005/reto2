@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Festividades de España 2025</title>
+    <link rel="stylesheet" href="estilo/styles.css">
+    <!-- jquery para hacer las peticiones -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎉 Festividades de España</h1>
+            <p class="subtitle">¡Días festivos de este 2025!</p>
+        </header>
+
+        <!-- formulario de busqueda de fechas -->
+        <div class="formulario-busqueda">
+            <form id="form-buscar">
+                <div class="campo-busqueda">
+                    <label for="buscar-nombre">Buscar festividad:</label>
+                    <input type="text" id="buscar-nombre" placeholder="Ej: Navidad, Año Nuevo...">
+                    <span class="error-mensaje" id="error-nombre"></span>
+                </div>
+                
+                <div class="campo-fecha">
+                    <label for="buscar-mes">Buscar por mes (1-12):</label>
+                    <input type="text" id="buscar-mes" placeholder="Ej: 1, 12...">
+                    <span class="error-mensaje" id="error-mes"></span>
+                </div>
+                
+                <button type="submit" class="btn-buscar">🔍 Buscar</button>
+                <button type="button" class="btn-limpiar" id="btn-limpiar">🗑️ Borrar</button>
+            </form>
+        </div>
+
+        <!-- botones de filtro -->
+        <div class="filtros">
+            <button class="btn-filtro activo" data-filtro="todos">Todos</button>
+            <button class="btn-filtro" data-filtro="nacional">Nacionales</button>
+            <button class="btn-filtro" data-filtro="regional">Regionales</button>
+            <button class="btn-filtro" data-filtro="favoritos">☆ Favoritos</button>
+        </div>
+
+        <div id="content">
+            <div class="loading">Cargando festividades...</div>
+        </div>
+    </div>
+
+    <!-- mi script -->
+    <script src="app.js"></script>
+</body>
+</html>
