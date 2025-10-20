@@ -22,13 +22,13 @@ var coloresFondo = {
     '1': 'linear-gradient(135deg, #89CFF0 0%, #5DADE2 100%)',
     '2': 'linear-gradient(135deg, #7FCD91 0%, #52BE80 100%)',
     '3': 'linear-gradient(135deg, #F9E79F 0%, #F4D03F 100%)',
-    '4': 'linear-gradient(135deg, #BB8FCE 0%, #8E44AD 100%)',
+    '4': 'linear-gradient(135deg, #BB8FCE 0%, #785586ff 100%)',
     '5': 'linear-gradient(135deg, #EC7063 0%, #C0392B 100%)',
     '6': 'linear-gradient(135deg, #ABB2B9 0%, #273746 100%)',
-    '7': 'linear-gradient(135deg, #F8B4D9 0%, #F06292 100%)',
+    '7': 'linear-gradient(135deg, #dfaae0ff 0%, #e97ba0ff 100%)',
     '8': 'linear-gradient(135deg, #D5DBDB 0%, #AEB6BF 100%)',
     '9': 'linear-gradient(135deg, #D7BCA0 0%, #B8956A 100%)',
-    '10': 'linear-gradient(135deg, #5499C7 0%, #1F618D 100%)',
+    '10': 'linear-gradient(135deg, #22506eff 0%, #113349ff 100%)',
     '11': 'linear-gradient(135deg, #F5E6D3 0%, #D7CCC8 100%)'
 };
 
@@ -43,7 +43,7 @@ var coloresTarjeta = {
     '7': 'linear-gradient(135deg, #F48FB1 0%, #F06292 100%)',
     '8': 'linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%)',
     '9': 'linear-gradient(135deg, #BCAAA4 0%, #A1887F 100%)',
-    '10': 'linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%)',
+    '10': 'linear-gradient(135deg, #22506eff 0%, #113349ff 100%)',
     '11': 'linear-gradient(135deg, #EFEBE9 0%, #D7CCC8 100%)'
 };
 
