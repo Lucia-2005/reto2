@@ -19,6 +19,7 @@ var nombres = {
 
 // Colores de fondo
 var coloresFondo = {
+    '': 'url(imagenes/background.jpeg)',
     '1': 'linear-gradient(135deg, #89CFF0 0%, #5DADE2 100%)',
     '2': 'linear-gradient(135deg, #7FCD91 0%, #52BE80 100%)',
     '3': 'linear-gradient(135deg, #F9E79F 0%, #F4D03F 100%)',
@@ -78,7 +79,7 @@ function cambiarAlbum() {
         document.getElementById('loading').style.display = 'none';
         document.getElementById('songsContainer').style.display = 'none';
         document.getElementById('noSelection').style.display = 'block';
-        document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        document.body.style.background = 'url(imagenes/background.jpeg)';
         albumActual = null;
         return;
     }
@@ -100,6 +101,22 @@ function cambiarAlbum() {
     setTimeout(function() {
         mostrarCanciones(valor);
     }, 300);
+}
+
+function iniciarJuego(album) {
+  albumElegido = album;
+  aciertos = 0;
+  errores = 0;
+  respuestas.clear();
+
+  document.getElementById("album-title").textContent = `Álbum: ${albumElegido}`;
+  document.getElementById("resultado").textContent = "";
+
+  const cancionesAleatorias = canciones
+    .sort(() => Math.random() - 0.5)
+    .slice(0, 15);
+
+  mostrarCanciones(cancionesAleatorias);
 }
 
 // Función para mostrar las canciones
