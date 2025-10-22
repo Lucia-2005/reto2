@@ -1,8 +1,11 @@
 // Variables globales
 var todasLasCanciones = [];
+var cancionesDelJuego = [];
+var cancionesCorrectas = [];
 var albumActual = null;
+var juegoTerminado = false;
 
-// Nombres de albums
+// Nombres de álbums
 var nombres = {
     '1': "1989",
     '2': "Taylor Swift",
@@ -19,7 +22,6 @@ var nombres = {
 
 // Colores de fondo
 var coloresFondo = {
-    '': 'url(imagenes/background.jpeg)',
     '1': 'linear-gradient(135deg, #89CFF0 0%, #5DADE2 100%)',
     '2': 'linear-gradient(135deg, #7FCD91 0%, #52BE80 100%)',
     '3': 'linear-gradient(135deg, #F9E79F 0%, #F4D03F 100%)',
@@ -33,29 +35,12 @@ var coloresFondo = {
     '11': 'linear-gradient(135deg, #F5E6D3 0%, #D7CCC8 100%)'
 };
 
-// Colores de tarjetas
-var coloresTarjeta = {
-    '1': 'linear-gradient(135deg, #B3E5FC 0%, #81D4FA 100%)',
-    '2': 'linear-gradient(135deg, #A5D6A7 0%, #81C784 100%)',
-    '3': 'linear-gradient(135deg, #FFF59D 0%, #FFF176 100%)',
-    '4': 'linear-gradient(135deg, #CE93D8 0%, #BA68C8 100%)',
-    '5': 'linear-gradient(135deg, #EF5350 0%, #E57373 100%)',
-    '6': 'linear-gradient(135deg, #546E7A 0%, #455A64 100%)',
-    '7': 'linear-gradient(135deg, #F48FB1 0%, #F06292 100%)',
-    '8': 'linear-gradient(135deg, #E0E0E0 0%, #BDBDBD 100%)',
-    '9': 'linear-gradient(135deg, #BCAAA4 0%, #A1887F 100%)',
-    '10': 'linear-gradient(135deg, #22506eff 0%, #113349ff 100%)',
-    '11': 'linear-gradient(135deg, #EFEBE9 0%, #D7CCC8 100%)'
-};
-
-// Cargar canciones cuando carga la página
+// Inicialización
 document.addEventListener('DOMContentLoaded', function() {
     cargarCanciones();
     
-    var albumSelect = document.getElementById('albumSelect');
-    albumSelect.addEventListener('change', function() {
-        cambiarAlbum();
-    });
+    document.getElementById('finishBtn').addEventListener('click', finalizarJuego);
+    document.getElementById('newGameBtn').addEventListener('click', nuevoJuego);
 });
 
 // Función para cargar canciones
@@ -63,123 +48,172 @@ async function cargarCanciones() {
     try {
         var response = await fetch('https://taylor-swift-api.sarbo.workers.dev/songs');
         todasLasCanciones = await response.json();
+        iniciarJuego();
     } catch (error) {
-        alert('Error al cargar canciones');
+        alert('Error al cargar canciones. Por favor, recarga la página.');
         console.log(error);
     }
 }
 
-// Función cuando cambia el select
-function cambiarAlbum() {
-    var albumSelect = document.getElementById('albumSelect');
-    var valor = albumSelect.value;
+// Función para iniciar el juego
+function iniciarJuego() {
+    juegoTerminado = false;
     
-    if (valor == '') {
-        // Ocultar todo
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('songsContainer').style.display = 'none';
-        document.getElementById('noSelection').style.display = 'block';
-        document.body.style.background = 'url(imagenes/background.jpeg)';
-        albumActual = null;
-        return;
-    }
-
-    albumActual = valor;
+    // Seleccionar álbum aleatorio
+    var albumIds = Object.keys(nombres);
+    var randomIndex = Math.floor(Math.random() * albumIds.length);
+    albumActual = albumIds[randomIndex];
     
-    // Ocultar todo primero
-    document.getElementById('loading').style.display = 'block';
-    document.getElementById('songsContainer').style.display = 'none';
-    document.getElementById('noSelection').style.display = 'none';
+    // Obtener canciones del álbum seleccionado
+    var cancionesAlbum = todasLasCanciones.filter(function(c) {
+        return c.album_id == albumActual;
+    });
     
-    // Cambiar color de fondo
-    var colorFondo = coloresFondo[valor];
-    if (colorFondo) {
-        document.body.style.background = colorFondo;
-    }
-
-    // Esperar un poco y mostrar canciones
-    setTimeout(function() {
-        mostrarCanciones(valor);
-    }, 300);
+    // Obtener canciones de otros álbumes
+    var cancionesOtros = todasLasCanciones.filter(function(c) {
+        return c.album_id != albumActual;
+    });
+    
+    // Mezclar y seleccionar canciones
+    cancionesAlbum.sort(function() { return Math.random() - 0.5; });
+    cancionesOtros.sort(function() { return Math.random() - 0.5; });
+    
+    // Seleccionar entre 5 y 8 canciones del álbum correcto
+    var numCorrectas = 5 + Math.floor(Math.random() * 4);
+    var seleccionCorrectas = cancionesAlbum.slice(0, numCorrectas);
+    
+    // Completar hasta 15 con canciones de otros álbumes
+    var numIncorrectas = 15 - numCorrectas;
+    var seleccionIncorrectas = cancionesOtros.slice(0, numIncorrectas);
+    
+    // Combinar y mezclar
+    cancionesDelJuego = seleccionCorrectas.concat(seleccionIncorrectas);
+    cancionesDelJuego.sort(function() { return Math.random() - 0.5; });
+    
+    // Guardar IDs de canciones correctas
+    cancionesCorrectas = seleccionCorrectas.map(function(c) { return c.id; });
+    
+    mostrarJuego();
 }
 
-function iniciarJuego(album) {
-  albumElegido = album;
-  aciertos = 0;
-  errores = 0;
-  respuestas.clear();
-
-  document.getElementById("album-title").textContent = `Álbum: ${albumElegido}`;
-  document.getElementById("resultado").textContent = "";
-
-  const cancionesAleatorias = canciones
-    .sort(() => Math.random() - 0.5)
-    .slice(0, 15);
-
-  mostrarCanciones(cancionesAleatorias);
-}
-
-// Función para mostrar las canciones
-function mostrarCanciones(id) {
-    var cancionesDelAlbum = [];
+// Función para mostrar el juego
+function mostrarJuego() {
+    // Cambiar fondo
+    document.body.style.background = coloresFondo[albumActual];
     
-    // Buscar canciones del album
-    for (var i = 0; i < todasLasCanciones.length; i++) {
-        if (todasLasCanciones[i].album_id == id) {
-            cancionesDelAlbum.push(todasLasCanciones[i]);
-        }
-    }
-    
-    // Poner el nombre del album
-    var nombreAlbum = nombres[id];
+    // Mostrar información del álbum
+    var nombreAlbum = nombres[albumActual];
     document.getElementById('albumName').textContent = nombreAlbum;
-    document.getElementById('songCount').textContent = cancionesDelAlbum.length + ' canciones';
+    document.getElementById('albumImage').src = './imagenes/' + albumActual + '.jpeg';
+    document.getElementById('albumImage').alt = nombreAlbum;
     
-    // Mostrar imagen del album
-    var albumImage = document.getElementById('albumImage');
-    albumImage.src = './imagenes/' + id + '.jpeg';
-    albumImage.alt = nombreAlbum;
-    
-    // Limpiar el grid
+    // Crear tarjetas de canciones
     var songsGrid = document.getElementById('songsGrid');
     songsGrid.innerHTML = '';
     
-    // Crear tarjetas para cada cancion
-    var colorTarjeta = coloresTarjeta[id];
-    
-    for (var j = 0; j < cancionesDelAlbum.length; j++) {
-        var cancion = cancionesDelAlbum[j];
+    for (var i = 0; i < cancionesDelJuego.length; i++) {
+        var cancion = cancionesDelJuego[i];
         
-        // Crear div de tarjeta
         var tarjeta = document.createElement('div');
         tarjeta.className = 'song-card';
-        if (colorTarjeta) {
-            tarjeta.style.background = colorTarjeta;
-        }
+        tarjeta.dataset.songId = cancion.id;
         
-        // Crear titulo
         var divTitulo = document.createElement('div');
         divTitulo.className = 'song-title';
-        if (cancion.title) {
-            divTitulo.textContent = cancion.title;
-        } else {
-            divTitulo.textContent = 'Sin título';
-        }
+        divTitulo.textContent = cancion.title || 'Sin título';
         
-        // Crear album
         var divAlbum = document.createElement('div');
         divAlbum.className = 'song-album';
-        divAlbum.textContent = nombreAlbum;
+        divAlbum.textContent = nombres[cancion.album_id] || 'Desconocido';
         
-        // Agregar al tarjeta
         tarjeta.appendChild(divTitulo);
         tarjeta.appendChild(divAlbum);
         
-        // Agregar al grid
+        tarjeta.addEventListener('click', function() {
+            if (!juegoTerminado) {
+                this.classList.toggle('selected');
+            }
+        });
+        
         songsGrid.appendChild(tarjeta);
     }
     
-    // Ocultar cargando y mostrar contenedor
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('songsContainer').style.display = 'block';
+    // Ocultar loading y mostrar juego
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('gameSection').classList.remove('hidden');
+    document.getElementById('results').style.display = 'none';
+}
+
+// Función para finalizar el juego
+function finalizarJuego() {
+    juegoTerminado = true;
+    
+    var tarjetas = document.querySelectorAll('.song-card');
+    var aciertos = 0;
+    var errores = 0;
+    
+    tarjetas.forEach(function(tarjeta) {
+        var songId = parseInt(tarjeta.dataset.songId);
+        var estaSeleccionada = tarjeta.classList.contains('selected');
+        var esCorrecta = cancionesCorrectas.indexOf(songId) !== -1;
+        
+        if (estaSeleccionada && esCorrecta) {
+            // Acierto: seleccionada y es correcta
+            tarjeta.classList.add('correct');
+            aciertos++;
+        } else if (estaSeleccionada && !esCorrecta) {
+            // Error: seleccionada pero no es correcta
+            tarjeta.classList.add('incorrect');
+            errores++;
+        } else if (!estaSeleccionada && esCorrecta) {
+            // Error: no seleccionada pero era correcta
+            tarjeta.classList.add('correct');
+            errores++;
+        } else {
+            // Correcto: no seleccionada y no era correcta
+            aciertos++;
+        }
+    });
+    
+    mostrarResultados(aciertos, errores);
+}
+
+// Función para mostrar los resultados
+function mostrarResultados(aciertos, errores) {
+    var total = 15;
+    var puntuacion = Math.round((aciertos / total) * 10);
+    
+    document.getElementById('correctCount').textContent = aciertos;
+    document.getElementById('incorrectCount').textContent = errores;
+    document.getElementById('finalScore').textContent = puntuacion + '/10';
+    
+    var scoreElement = document.getElementById('finalScore');
+    var mensaje = '';
+    
+    if (puntuacion >= 9) {
+        scoreElement.className = 'score excellent';
+        mensaje = '¡Increíble! Eres un verdadero Swiftie 🌟';
+    } else if (puntuacion >= 7) {
+        scoreElement.className = 'score good';
+        mensaje = '¡Muy bien! Conoces bastante a Taylor 🎵';
+    } else if (puntuacion >= 5) {
+        scoreElement.className = 'score fair';
+        mensaje = '¡No está mal! Sigue escuchando más 🎧';
+    } else {
+        scoreElement.className = 'score poor';
+        mensaje = '¡Sigue intentándolo! Practica más 💪';
+    }
+    
+    document.getElementById('scoreMessage').textContent = mensaje;
+    
+    setTimeout(function() {
+        document.getElementById('gameSection').classList.add('hidden');
+        document.getElementById('results').style.display = 'block';
+    }, 2000);
+}
+
+// Función para iniciar un nuevo juego
+function nuevoJuego() {
+    document.getElementById('results').style.display = 'none';
+    iniciarJuego();
 }

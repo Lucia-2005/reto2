@@ -3,48 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Canciones Taylor</title>
+    <title>Adivina las Canciones de Taylor Swift</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>🎵 Canciones de Taylor Swift</h1>
+        <h1>🎵 ¿Conoces las Canciones de Taylor Swift?</h1>
         
-        <div class="selector">
-            <label>Selecciona un álbum:</label>
-            <select id="albumSelect">
-                <option value="">-- Elige un álbum --</option>
-                <option value="1">1989</option>
-                <option value="2">Taylor Swift</option>
-                <option value="3">Fearless</option>
-                <option value="4">Speak Now</option>
-                <option value="5">Red</option>
-                <option value="6">Reputation</option>
-                <option value="7">Lover</option>
-                <option value="8">Folklore</option>
-                <option value="9">Evermore</option>
-                <option value="10">Midnights</option>
-                <option value="11">The Tortured Poets Department</option>
-            </select>
-        </div>
-
         <div id="loading" class="loading">
-            Cargando...
+            Cargando canciones...
         </div>
 
-        <div id="songsContainer" class="songs-container">
-            <div class="album-info">
+        <div id="gameSection" class="game-section hidden">
+            <div class="album-header">
                 <img id="albumImage" class="album-image" src="" alt="">
-                <div class="album-text">
+                <div class="album-info">
                     <h2 id="albumName"></h2>
-                    <p class="song-count" id="songCount"></p>
+                    <div class="instructions">
+                        <p><strong>🎮 Instrucciones:</strong></p>
+                        <p>Selecciona las canciones que crees que pertenecen a este álbum.</p>
+                        <p>Hay al menos 5 canciones correctas entre las 15 mostradas.</p>
+                    </div>
                 </div>
             </div>
             <div id="songsGrid" class="songs-grid"></div>
+            <div class="controls">
+                <button id="finishBtn" class="btn-finish">Finalizar y Ver Resultados</button>
+            </div>
         </div>
 
-        <div id="noSelection" class="no-selection">
-            Selecciona un álbum para ver las canciones
+        <div id="results" class="results">
+            <h2>🎉 Resultados</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="correctCount">0</div>
+                    <div class="stat-label">Aciertos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="incorrectCount">0</div>
+                    <div class="stat-label">Errores</div>
+                </div>
+            </div>
+            <div class="score" id="finalScore">0/10</div>
+            <p id="scoreMessage" style="font-size: 1.3rem; color: #666; margin: 20px 0;"></p>
+            <div class="controls">
+                <button id="newGameBtn" class="btn-new-game">🎮 Nuevo Juego</button>
+            </div>
         </div>
     </div>
 
