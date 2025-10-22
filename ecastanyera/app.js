@@ -151,61 +151,55 @@ function finalizarJuego() {
     var tarjetas = document.querySelectorAll('.song-card');
     var aciertos = 0;
     var errores = 0;
-    
+
     tarjetas.forEach(function(tarjeta) {
         var songId = parseInt(tarjeta.dataset.songId);
         var estaSeleccionada = tarjeta.classList.contains('selected');
         var esCorrecta = cancionesCorrectas.indexOf(songId) !== -1;
-        
+
         if (estaSeleccionada && esCorrecta) {
-            // Acierto: seleccionada y es correcta
             tarjeta.classList.add('correct');
             aciertos++;
         } else if (estaSeleccionada && !esCorrecta) {
-            // Error: seleccionada pero no es correcta
             tarjeta.classList.add('incorrect');
             errores++;
         } else if (!estaSeleccionada && esCorrecta) {
-            // Error: no seleccionada pero era correcta
+            // No seleccionada pero era correcta → error
             tarjeta.classList.add('correct');
             errores++;
-        } else {
-            // Correcto: no seleccionada y no era correcta
-            aciertos++;
         }
     });
-    
+
     mostrarResultados(aciertos, errores);
 }
 
 // Función para mostrar los resultados
 function mostrarResultados(aciertos, errores) {
-    var total = 15;
-    var puntuacion = Math.round((aciertos / total) * 10);
-    
+    var puntuacion = aciertos * 10; // ✅ 10 puntos por canción correcta
+
     document.getElementById('correctCount').textContent = aciertos;
     document.getElementById('incorrectCount').textContent = errores;
-    document.getElementById('finalScore').textContent = puntuacion + '/10';
-    
+    document.getElementById('finalScore').textContent = puntuacion + ' pts';
+
     var scoreElement = document.getElementById('finalScore');
     var mensaje = '';
-    
-    if (puntuacion >= 9) {
+
+    if (puntuacion >= 80) {
         scoreElement.className = 'score excellent';
         mensaje = '¡Increíble! Eres un verdadero Swiftie 🌟';
-    } else if (puntuacion >= 7) {
+    } else if (puntuacion >= 50) {
         scoreElement.className = 'score good';
         mensaje = '¡Muy bien! Conoces bastante a Taylor 🎵';
-    } else if (puntuacion >= 5) {
+    } else if (puntuacion >= 30) {
         scoreElement.className = 'score fair';
         mensaje = '¡No está mal! Sigue escuchando más 🎧';
     } else {
         scoreElement.className = 'score poor';
         mensaje = '¡Sigue intentándolo! Practica más 💪';
     }
-    
+
     document.getElementById('scoreMessage').textContent = mensaje;
-    
+
     setTimeout(function() {
         document.getElementById('gameSection').classList.add('hidden');
         document.getElementById('results').style.display = 'block';
