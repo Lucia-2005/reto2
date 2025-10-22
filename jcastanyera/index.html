@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Festividades de España 2025</title>
+    <link rel="icon" type="image/png" href="img/icono.jpeg">
     <link rel="stylesheet" href="estilo/styles.css">
     <!-- jquery para hacer las peticiones -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -11,8 +12,8 @@
 <body>
     <div class="container">
         <header>
-            <h1>🎉 Festividades de España</h1>
-            <p class="subtitle">Días festivos oficiales 2025</p>
+            <h1>Festividades de España</h1>
+            <p class="subtitle">Días festivos 2025</p>
         </header>
 
         <!-- formulario de busqueda -->
@@ -30,8 +31,8 @@
                     <span class="error-mensaje" id="error-mes"></span>
                 </div>
                 
-                <button type="submit" class="btn-buscar">🔍 Buscar</button>
-                <button type="button" class="btn-limpiar" id="btn-limpiar">🗑️ Limpiar</button>
+                <button type="submit" class="btn-buscar">Buscar</button>
+                <button type="button" class="btn-limpiar" id="btn-limpiar">Borrar</button>
             </form>
         </div>
 
@@ -40,9 +41,9 @@
             <button class="btn-filtro activo" data-filtro="todos">Todos</button>
             <button class="btn-filtro" data-filtro="nacional">Nacionales</button>
             <button class="btn-filtro" data-filtro="regional">Regionales</button>
-            <button class="btn-filtro" data-filtro="favoritos">⭐ Favoritos</button>
+            <button class="btn-filtro" data-filtro="favoritos">Favoritos</button>
         </div>
-
+ 
         <div id="content">
             <div class="loading">Cargando festividades...</div>
         </div>

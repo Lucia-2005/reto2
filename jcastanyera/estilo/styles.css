@@ -4,11 +4,11 @@
     padding: 0;
     box-sizing: border-box;
 }
-
+ 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     /* colores bonitos en rosa */
-    background: linear-gradient(135deg, #fff6fb 0%, #ffeef7 100%);
+    background: linear-gradient(135deg, #fbeff6 0%, #f1dfe9 100%);
     min-height: 100vh;
     padding: 20px;
 }
@@ -40,7 +40,8 @@ header {
 h1 {
     font-size: 2.5em;
     margin-bottom: 10px;
-    text-shadow: 1px 1px 3px rgba(255,111,163,0.08);
+    /* sombra rosa sutil + contorno blanco para destacar el texto sobre la imagen */
+    text-shadow: 0 0 15px rgba(255,255,255,0.95), 1px 1px 3px rgba(255,111,163,0.08);
 }
 
 .subtitle {
@@ -52,7 +53,6 @@ h1 {
 .formulario-busqueda {
     background: white;
     padding: 30px;
-    border-radius: 15px;
     margin-bottom: 30px;
     box-shadow: 0 4px 15px rgba(174, 74, 120, 0.1);
 }
@@ -169,7 +169,7 @@ h1 {
     padding: 40px;
 }
 
-/* grid de las tarjetas */
+/* espacio de las tarjetas */
 .festividades-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -181,7 +181,6 @@ h1 {
 /* tarjeta individual */
 .festividad-card {
     background: #ffffff;
-    border-radius: 15px;
     padding: 35px;
     box-shadow: 0 8px 20px rgba(174, 74, 120, 0.08);
     transition: transform 0.3s ease;

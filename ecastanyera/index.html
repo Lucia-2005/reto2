@@ -2,38 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="imagenes/icono.jpeg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adivina las Canciones de Taylor Swift</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
-        <h1>🎵 ¿Conoces las Canciones de Taylor Swift?</h1>
+        <h1>¿Conoces las Canciones de Taylor Swift?</h1>
         
+        <!-- pantalla de carga -->
         <div id="loading" class="loading">
             Cargando canciones...
         </div>
 
+        <!-- seccion principal del juego -->
         <div id="gameSection" class="game-section hidden">
             <div class="album-header">
                 <img id="albumImage" class="album-image" src="" alt="">
                 <div class="album-info">
                     <h2 id="albumName"></h2>
                     <div class="instructions">
-                        <p><strong>🎮 Instrucciones:</strong></p>
+                        <p><strong>Instrucciones:</strong></p>
                         <p>Selecciona las canciones que crees que pertenecen a este álbum.</p>
-                        <p>Hay al menos 5 canciones correctas entre las 15 mostradas.</p>
+                        <p>Pulsa el botón de finalizar cuando las hayas elegido.</p>
                     </div>
                 </div>
             </div>
-            <div id="songsGrid" class="songs-grid"></div>
+            
+            <!-- aqui van las canciones -->
+            <div id="songsGrid" class="songs-grid">
+                
+            </div>
+            
             <div class="controls">
-                <button id="finishBtn" class="btn-finish">Finalizar y Ver Resultados</button>
+                <button id="finishBtn" class="btn-finish">Finalizar</button>
             </div>
         </div>
 
+        <!-- pantalla de resultados -->
         <div id="results" class="results">
-            <h2>🎉 Resultados</h2>
+            <h2>Resultados</h2>
             <div class="stats">
                 <div class="stat-item">
                     <div class="stat-value" id="correctCount">0</div>
@@ -43,11 +53,11 @@
                     <div class="stat-value" id="incorrectCount">0</div>
                     <div class="stat-label">Errores</div>
                 </div>
-            </div>
-            <div class="score" id="finalScore">0/10</div>
+            </div> 
+            <div class="score" id="finalScore">0%</div>
             <p id="scoreMessage" style="font-size: 1.3rem; color: #666; margin: 20px 0;"></p>
             <div class="controls">
-                <button id="newGameBtn" class="btn-new-game">🎮 Nuevo Juego</button>
+                <button id="newGameBtn" class="btn-new-game">volver a jugar</button>
             </div>
         </div>
     </div>

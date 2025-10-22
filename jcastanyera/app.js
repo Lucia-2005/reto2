@@ -148,6 +148,9 @@ $(document).ready(function() {
     }
     
     // funcion para agregar eventos para ir a wikipedia
+    
+    //NO SIEMPRE FUNCIONA EL ENLACE porque los nombres en la api no siempre 
+    //coinciden con los de la wiki
     function agregarEventosWikipedia() {
         $('.festividad-card').click(function() {
             // obtener la fecha de la festividad

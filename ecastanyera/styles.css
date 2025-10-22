@@ -1,3 +1,4 @@
+/* reseteo basico */
 * {
     margin: 0;
     padding: 0;
@@ -13,6 +14,9 @@ body {
     min-height: 100vh;
     padding: 20px;
     transition: background 0.5s ease;
+    /* variable para color de selección del album */
+    --album-accent: linear-gradient(135deg, #e3b8d2 0%, #ddacc0 100%);
+    --album-accent-border: #a47777;
 }
 
 .container {
@@ -20,6 +24,7 @@ body {
     margin: 0 auto;
 }
 
+/* titulo principal */
 h1 {
     text-align: center;
     color: white;
@@ -28,10 +33,10 @@ h1 {
     text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
 }
 
+/* seccion del juego */
 .game-section {
     background: white;
     padding: 30px;
-    border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     margin-bottom: 20px;
 }
@@ -45,6 +50,7 @@ h1 {
     border-bottom: 3px solid #eee;
 }
 
+/* imagen del album */
 .album-image {
     width: 150px;
     height: 150px;
@@ -69,6 +75,7 @@ h1 {
     line-height: 1.6;
 }
 
+/* espacio de las canciones */
 .songs-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -76,6 +83,7 @@ h1 {
     margin-bottom: 30px;
 }
 
+/* tarjeta de cancion */
 .song-card {
     padding: 20px;
     border-radius: 10px;
@@ -90,9 +98,10 @@ h1 {
     box-shadow: 0 6px 15px rgba(0,0,0,0.2);
 }
 
+/* cuando esta seleccionada */
 .song-card.selected {
-    border-color: #667eea;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: var(--album-accent-border);
+    background: var(--album-accent);
 }
 
 .song-card.selected .song-title,
@@ -100,14 +109,14 @@ h1 {
     color: white;
 }
 
+/* cuando es correcta */
 .song-card.correct {
-    border-color: #4caf50;
-    background: linear-gradient(135deg, #81c784 0%, #4caf50 100%);
+    background-color: #87af88;
 }
 
+/* cuando es incorrecta */
 .song-card.incorrect {
-    border-color: #f44336;
-    background: linear-gradient(135deg, #e57373 0%, #f44336 100%);
+    background-color: #f44336;
 }
 
 .song-card.correct .song-title,
@@ -129,6 +138,7 @@ h1 {
     font-size: 0.9rem;
 }
 
+/* controles y botones */
 .controls {
     display: flex;
     justify-content: center;
@@ -146,7 +156,7 @@ button {
 }
 
 .btn-finish {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-color: darkgrey;
     color: white;
 }
 
@@ -170,10 +180,10 @@ button {
     box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
 }
 
+/* pantalla de resultados */
 .results {
     background: white;
     padding: 40px;
-    border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     text-align: center;
     display: none;
@@ -191,6 +201,7 @@ button {
     margin: 20px 0;
 }
 
+/* colores segun puntuacion */
 .score.excellent {
     color: #4caf50;
 }
@@ -222,7 +233,7 @@ button {
 .stat-value {
     font-size: 2rem;
     font-weight: bold;
-    color: #667eea;
+    color: darkgrey;
 }
 
 .stat-label {
@@ -230,6 +241,7 @@ button {
     margin-top: 5px;
 }
 
+/* pantalla de carga */
 .loading {
     text-align: center;
     color: white;
